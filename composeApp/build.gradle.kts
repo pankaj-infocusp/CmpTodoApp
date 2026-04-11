@@ -29,13 +29,14 @@ kotlin {
             isStatic = true
         }
     }
-    
-    jvm("desktop")
+
+    jvm()
     
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.appcompat)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
@@ -44,7 +45,7 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
             implementation(libs.compose.uiToolingPreview)
-            implementation(libs.compose.navigation)
+//            implementation(libs.compose.navigation)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.androidx.room.runtime)
@@ -57,11 +58,12 @@ kotlin {
             api(libs.koin.annotations)
 
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.collections.immutable)
 
             implementation(libs.androidx.navigation3.runtime)
-            implementation(libs.androidx.navigation3.ui)
             implementation(libs.androidx.lifecycle.viewmodel.navigation3)
-            implementation(libs.androidx.material3.adaptive.navigation3)
+            implementation(libs.compose.navigation.ui)
+            implementation(libs.compose.material3AdaptiveNavigationSuite)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -105,7 +107,7 @@ dependencies {
     add("kspAndroid", libs.androidx.room.compiler)
     add("kspIosSimulatorArm64", libs.androidx.room.compiler)
     add("kspIosArm64", libs.androidx.room.compiler)
-    add("kspDesktop", libs.androidx.room.compiler)
+    add("kspJvm", libs.androidx.room.compiler)
 }
 
 compose.desktop {
