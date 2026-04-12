@@ -3,7 +3,9 @@ package com.sampe.cmp.app.di
 import com.sampe.cmp.app.di.coroutine.coroutinesModule
 import com.sampe.cmp.app.di.navigation.bottomBarModule
 import com.sampe.cmp.app.di.navigation.navigationModule
+import com.sampe.cmp.app.di.repository.repositoryModule
 import com.sampe.cmp.app.di.room.roomModule
+import com.sampe.cmp.app.di.viewmodel.viewModelModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -26,5 +28,7 @@ internal val appModules = listOf(
     navigationModule,
     bottomBarModule,
     roomBuilderModule(),
-    roomModule
+    roomModule,
+    repositoryModule,
+    viewModelModule
 )

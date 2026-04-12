@@ -5,26 +5,26 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.sampe.cmp.app.database.entity.TodoEntity
+import com.sampe.cmp.app.database.entity.Todo
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TodoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun createTodo(item: TodoEntity)
+    suspend fun createTodo(item: Todo)
 
     @Update
-    suspend fun updateTodo(item: TodoEntity)
+    suspend fun updateTodo(item: Todo)
 
     @Query("SELECT * FROM TodoEntity")
-    suspend fun getAllTodo(): List<TodoEntity>
+    suspend fun getAllTodo(): List<Todo>
 
     @Query("SELECT * FROM TodoEntity")
-    fun getAllTodoAsFlow(): Flow<List<TodoEntity>>
+    fun getAllTodoAsFlow(): Flow<List<Todo>>
 
     @Query("SELECT * FROM TodoEntity WHERE id = :id")
-    suspend fun getTodoById(id: Long): TodoEntity?
+    suspend fun getTodoById(id: Long): Todo?
 
     @Query("DELETE FROM TodoEntity")
     suspend fun deleteAllTodos()

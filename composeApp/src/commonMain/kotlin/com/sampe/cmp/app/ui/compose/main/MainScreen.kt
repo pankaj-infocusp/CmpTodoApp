@@ -1,4 +1,4 @@
-package com.sampe.cmp.app.ui.home
+package com.sampe.cmp.app.ui.compose.main
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -36,18 +36,18 @@ import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 
 @Composable
-fun HomeScreen(
+fun MainScreen(
     modifier: Modifier = Modifier,
     appState: TodoAppState
 ) {
-    HomeScreenContent(
+    MainScreenContent(
         modifier = modifier,
         appState = appState
     )
 }
 
 @Composable
-private fun HomeScreenContent(
+private fun MainScreenContent(
     modifier: Modifier = Modifier,
     appState: TodoAppState,
     navEventController: NavEventController = koinInject()
@@ -58,7 +58,7 @@ private fun HomeScreenContent(
         navEventController.sendEvent(HomeEvent.OnTabClick(destination))
     }
 
-    HomeScreenScaffold(
+    MainScreenScaffold(
         appState = appState,
         navItems = navItems.toImmutableList(),
         currentDestination = appState.navBackState.currentDestination as TopLevelDestination,
@@ -68,7 +68,7 @@ private fun HomeScreenContent(
 }
 
 @Composable
-private fun HomeScreenScaffold(
+private fun MainScreenScaffold(
     appState: TodoAppState,
     navItems: ImmutableList<TopLevelDestination>,
     currentDestination: TopLevelDestination,

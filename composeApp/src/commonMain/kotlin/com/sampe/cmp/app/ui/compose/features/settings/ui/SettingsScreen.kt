@@ -1,4 +1,4 @@
-package com.sampe.cmp.app.features.favorites.ui
+package com.sampe.cmp.app.ui.compose.features.settings.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,12 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FavoritesScreen(
+fun SettingsScreen(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(text = "Hello, Favorites!")
-
+        Text(text = "Hello, Settings!")
         repeat(5) {
             Text(text = "Hello $it")
         }

@@ -45,7 +45,7 @@ kotlin {
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
             implementation(libs.compose.uiToolingPreview)
-//            implementation(libs.compose.navigation)
+
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.androidx.room.runtime)
@@ -64,6 +64,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel.navigation3)
             implementation(libs.compose.navigation.ui)
             implementation(libs.compose.material3AdaptiveNavigationSuite)
+            implementation(libs.compose.navigation.adaptive)
+            implementation(libs.compose.navigation.adaptive.navigation)
+            implementation(libs.compose.navigation.adaptive.layout)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
