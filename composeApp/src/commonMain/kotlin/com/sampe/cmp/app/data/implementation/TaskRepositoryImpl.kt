@@ -31,4 +31,12 @@ class TaskRepositoryImpl(
     override suspend fun deleteAllTodos() {
         todoDao.deleteAllTodos()
     }
+
+    override suspend fun updateTitle(id: Long, title: String) {
+        todoDao.updateTodoTitle(id, title)
+    }
+
+    override suspend fun updateBody(id: Long, body: String) {
+        todoDao.updateTodoBody(id, body)
+    }
 }

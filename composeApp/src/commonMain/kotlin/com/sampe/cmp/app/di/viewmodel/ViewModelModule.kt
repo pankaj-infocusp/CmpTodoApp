@@ -4,6 +4,8 @@ import com.sampe.cmp.app.domain.usecase.AddTodoUseCase
 import com.sampe.cmp.app.domain.usecase.DeleteTodoUseCase
 import com.sampe.cmp.app.domain.usecase.GetAllTodosUseCase
 import com.sampe.cmp.app.domain.usecase.GetTodoByIdUseCase
+import com.sampe.cmp.app.domain.usecase.UpdateBodyUseCase
+import com.sampe.cmp.app.domain.usecase.UpdateTitleUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateTodoUseCase
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.AddTodoViewModel
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.TodoViewModel
@@ -19,6 +21,8 @@ val viewModelModule = module {
     singleOf(::DeleteTodoUseCase)
     singleOf(::GetTodoByIdUseCase)
     singleOf(::UpdateTodoUseCase)
+    singleOf(::UpdateTitleUseCase)
+    singleOf(::UpdateBodyUseCase)
 
     //ViewModel provider
     viewModelOf(::TodoViewModel)

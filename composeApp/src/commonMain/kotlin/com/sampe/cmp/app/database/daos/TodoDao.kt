@@ -20,8 +20,11 @@ interface TodoDao {
     @Query("SELECT * FROM TodoEntity")
     suspend fun getAllTodo(): List<Todo>
 
-    @Query("SELECT * FROM TodoEntity")
+    @Query("SELECT * FROM TodoEntity WHERE isCompleted = false")
     fun getAllTodoAsFlow(): Flow<List<Todo>>
+
+    @Query("SELECT * FROM TodoEntity WHERE isCompleted = true")
+    fun getCompletedTodos(): Flow<List<Todo>>
 
     @Query("SELECT * FROM TodoEntity WHERE id = :id")
     suspend fun getTodoById(id: Long): Todo?
@@ -31,6 +34,12 @@ interface TodoDao {
 
     @Query("DELETE FROM TodoEntity WHERE id = :id")
     suspend fun deleteTodoById(id: Long)
+
+    @Query("UPDATE TodoEntity SET title = :title WHERE id = :id")
+    suspend fun updateTodoTitle(id: Long, title: String)
+
+    @Query("UPDATE TodoEntity SET body = :body WHERE id = :id")
+    suspend fun updateTodoBody(id: Long, body: String)
 
     @Query("SELECT count(*) FROM TodoEntity")
     suspend fun count(): Int

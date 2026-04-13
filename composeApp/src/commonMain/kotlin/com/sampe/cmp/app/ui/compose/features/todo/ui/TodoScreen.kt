@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import com.sampe.cmp.app.database.entity.Todo
 import com.sampe.cmp.app.enums.TodoColors
 import com.sampe.cmp.app.utils.DateTimeUtils
-import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.painterResource
 import sampecmpapp.composeapp.generated.resources.Res
 import sampecmpapp.composeapp.generated.resources.ic_add_icon
@@ -78,7 +77,7 @@ private fun TodoScaffold(
             modifier = modifier.fillMaxSize(),
             todos = todos,
             onCreateTodo = onCreateTodo,
-            onItemClick = onDelete,
+            onItemClick = onItemClick,
             onComplete = onComplete,
             onDelete = onDelete
         )
@@ -108,7 +107,6 @@ private fun SinglePanDeviceScaffold(
     onItemClick: (Long) -> Unit,
     onComplete: (Todo) -> Unit
 ) {
-    val colorList = TodoColors.entries.map { it.value }.toImmutableList()
     Scaffold(
         modifier = modifier.fillMaxSize(),
         floatingActionButton = {
@@ -168,8 +166,7 @@ private fun TodoItem(
         elevation = CardDefaults.elevatedCardElevation(4.dp),
         modifier = modifier
             .fillMaxWidth()
-            .height(74.dp)
-            .clickable { onItemClick(item.id) },
+            .height(74.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(item.color)
         )
@@ -187,7 +184,11 @@ private fun TodoItem(
             )
             Column(
                 modifier = Modifier.fillMaxHeight()
-                    .fillMaxWidth().weight(1f),
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .clickable {
+                        onItemClick(item.id)
+                    },
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(

@@ -50,14 +50,24 @@ internal class TodoTabNavGraph: NavGraph {
                 val viewModel: UpdateTodoViewModel = koinViewModel()
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-                LaunchedEffect(entry.todoId) {
+                LaunchedEffect(Unit) {
+                    println("Fetching Todo with id: ${entry.todoId}")
                     viewModel.getTodoById(entry.todoId)
                 }
 
                 UpdateTodoScreen(
                     uiState = uiState,
-                    onUpdateTodo = { todo ->
-                        viewModel.updateTodo(todo)
+                    onTitleChange = { id, title ->
+                        viewModel.updateTitle(id, title)
+                    },
+                    onDescriptionChange = { id, body ->
+                        viewModel.updateBody(id, body)
+                    },
+                    onDeleteClick = { id ->
+                        viewModel.deleteTodo(id)
+                    },
+                    onBackClick = {
+                        navEventController.sendEvent(Event.OnBack)
                     }
                 )
             }
