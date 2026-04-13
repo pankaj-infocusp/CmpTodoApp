@@ -7,6 +7,7 @@ import com.sampe.cmp.app.database.entity.Todo
 import com.sampe.cmp.app.domain.usecase.AddTodoUseCase
 import com.sampe.cmp.app.domain.usecase.DeleteTodoUseCase
 import com.sampe.cmp.app.domain.usecase.GetAllTodosUseCase
+import com.sampe.cmp.app.domain.usecase.UpdateTodoUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 class TodoViewModel(
     getAllTodosUseCase: GetAllTodosUseCase,
     private val addTodoUseCase: AddTodoUseCase,
-    private val deleteTodoUseCase: DeleteTodoUseCase
+    private val deleteTodoUseCase: DeleteTodoUseCase,
+    private val updateTodoUseCase: UpdateTodoUseCase,
 ): ViewModel() {
 
     val todos = getAllTodosUseCase.invoke()
@@ -29,6 +31,12 @@ class TodoViewModel(
     fun addTodo(todo: Todo) {
         viewModelScope.launch(Dispatchers.IO) {
             addTodoUseCase.invoke(todo)
+        }
+    }
+
+    fun onTodoCompleted(todo: Todo) {
+        viewModelScope.launch(Dispatchers.IO) {
+            updateTodoUseCase.invoke(todo)
         }
     }
 

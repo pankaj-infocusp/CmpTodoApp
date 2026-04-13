@@ -46,9 +46,9 @@ private fun AppNavigation(
                     }
                 }
 
-                /*else -> {
+                else -> {
                     navBackStack.add(destination)
-                }*/
+                }
             }
         }
     }

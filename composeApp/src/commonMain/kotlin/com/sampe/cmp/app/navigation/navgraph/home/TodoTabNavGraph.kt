@@ -1,32 +1,59 @@
 package com.sampe.cmp.app.navigation.navgraph.home
 
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.EntryProviderScope
 import com.sampe.cmp.app.extension.isSinglePane
+import com.sampe.cmp.app.navigation.events.TodoEvent
 import com.sampe.cmp.app.ui.compose.features.todo.ui.TodoScreen
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.TodoViewModel
 import com.sampe.cmp.app.navigation.main.Destination
-import com.sampe.cmp.app.navigation.main.HomeDestination
+import com.sampe.cmp.app.navigation.main.MainDestination
+import com.sampe.cmp.app.navigation.main.TodoDestination
 import com.sampe.cmp.app.navigation.navcontroller.NavEventController
 import com.sampe.cmp.app.navigation.navcontroller.NavGraph
+import com.sampe.cmp.app.ui.compose.features.todo.ui.UpdateTodoScreen
+import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.UpdateTodoViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
-internal class HomeNavGraph: NavGraph {
+internal class TodoTabNavGraph: NavGraph {
     override val navGraph: EntryProviderScope<Destination>.(NavEventController) -> Unit
         get() = { navEventController ->
-            entry<HomeDestination.Home> {
+            entry<MainDestination.TodoTab> {
                 val viewModel: TodoViewModel = koinViewModel()
                 val todos by viewModel.todos.collectAsStateWithLifecycle()
                 TodoScreen(
                     isSinglePane = currentWindowAdaptiveInfo().windowSizeClass.isSinglePane(),
                     todos = todos,
+                    onItemClick = { id ->
+                        navEventController.sendEvent(TodoEvent.OnUpdateTodoClick(id))
+                    },
                     onCreateTodo = { todo ->
                         viewModel.addTodo(todo)
                     },
+                    onComplete = { todo ->
+                        viewModel.onTodoCompleted(todo)
+                    },
                     onDelete = { id ->
                         viewModel.deleteTodo(id)
+                    }
+                )
+            }
+
+            entry<TodoDestination.UpdateTodo> { entry ->
+                val viewModel: UpdateTodoViewModel = koinViewModel()
+                val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+                LaunchedEffect(entry.todoId) {
+                    viewModel.getTodoById(entry.todoId)
+                }
+
+                UpdateTodoScreen(
+                    uiState = uiState,
+                    onUpdateTodo = { todo ->
+                        viewModel.updateTodo(todo)
                     }
                 )
             }

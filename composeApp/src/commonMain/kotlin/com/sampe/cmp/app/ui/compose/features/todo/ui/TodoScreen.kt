@@ -46,14 +46,18 @@ fun TodoScreen(
     modifier: Modifier = Modifier,
     isSinglePane: Boolean,
     todos: List<Todo>,
+    onItemClick: (Long) -> Unit,
     onCreateTodo: (Todo) -> Unit,
+    onComplete: (Todo) -> Unit,
     onDelete: (Long) -> Unit
 ) {
     TodoScaffold(
         modifier = modifier,
         isSinglePane = isSinglePane,
         todos = todos,
+        onItemClick = onItemClick,
         onCreateTodo = onCreateTodo,
+        onComplete = onComplete,
         onDelete = onDelete
     )
 }
@@ -63,7 +67,9 @@ private fun TodoScaffold(
     modifier: Modifier = Modifier,
     isSinglePane: Boolean,
     todos: List<Todo>,
+    onItemClick: (Long) -> Unit,
     onCreateTodo: (Todo) -> Unit,
+    onComplete: (Todo) -> Unit,
     onDelete: (Long) -> Unit
 ) {
 
@@ -72,9 +78,9 @@ private fun TodoScaffold(
             modifier = modifier.fillMaxSize(),
             todos = todos,
             onCreateTodo = onCreateTodo,
-            onDelete = onDelete,
-            onItemClick = {},
-            onComplete = {}
+            onItemClick = onDelete,
+            onComplete = onComplete,
+            onDelete = onDelete
         )
     } else {
         /*MultiPanDeviceScaffold(
@@ -86,9 +92,9 @@ private fun TodoScaffold(
             modifier = modifier.fillMaxSize(),
             todos = todos,
             onCreateTodo = onCreateTodo,
-            onDelete = {},
-            onItemClick = {},
-            onComplete = {}
+            onItemClick = onItemClick,
+            onComplete = onComplete,
+            onDelete = onDelete
         )
     }
 }
@@ -100,7 +106,7 @@ private fun SinglePanDeviceScaffold(
     onCreateTodo: (Todo) -> Unit,
     onDelete: (Long) -> Unit,
     onItemClick: (Long) -> Unit,
-    onComplete: (Long) -> Unit
+    onComplete: (Todo) -> Unit
 ) {
     val colorList = TodoColors.entries.map { it.value }.toImmutableList()
     Scaffold(
@@ -163,7 +169,7 @@ private fun TodoItem(
     modifier: Modifier = Modifier,
     item: Todo,
     onItemClick: (Long) -> Unit,
-    onComplete: (Long) -> Unit,
+    onComplete: (Todo) -> Unit,
     onDelete: (Long) -> Unit
 ) {
     ElevatedCard(
@@ -181,7 +187,7 @@ private fun TodoItem(
                 modifier = Modifier
                     .fillMaxHeight(),
                 selected = item.isCompleted,
-                onClick = { onComplete.invoke(item.id) },
+                onClick = { onComplete.invoke(item.copy(isCompleted = true)) },
                 colors = RadioButtonDefaults.colors(
                     selectedColor = Color.White,
                     unselectedColor = Color.White
@@ -236,7 +242,9 @@ private fun TodoListPreview() {
                 updatedAt = null
             )
         ),
+        onItemClick = {},
         onCreateTodo = {},
+        onComplete = {},
         onDelete = {}
     )
 }

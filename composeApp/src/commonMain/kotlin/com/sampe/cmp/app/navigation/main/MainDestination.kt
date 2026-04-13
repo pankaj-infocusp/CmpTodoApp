@@ -4,36 +4,36 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import sampecmpapp.composeapp.generated.resources.Res
-import sampecmpapp.composeapp.generated.resources.favorites_title
-import sampecmpapp.composeapp.generated.resources.home_title
+import sampecmpapp.composeapp.generated.resources.completed_todo_title
+import sampecmpapp.composeapp.generated.resources.todo_tab_title
 import sampecmpapp.composeapp.generated.resources.ic_fav_icon
 import sampecmpapp.composeapp.generated.resources.ic_home_icon
 import sampecmpapp.composeapp.generated.resources.ic_settings_icon
-import sampecmpapp.composeapp.generated.resources.settings_title
+import sampecmpapp.composeapp.generated.resources.settings_tab_title
 
-object HomeDestination {
+object MainDestination {
 
     @Serializable
-    data object Home : Destination, TopLevelDestination {
+    data object TodoTab : Destination, TopLevelDestination, TopAppBarVisible {
         override val icon: DrawableResource
             get() = Res.drawable.ic_home_icon
         override val title: StringResource
-            get() = Res.string.home_title
+            get() = Res.string.todo_tab_title
     }
 
     @Serializable
-    data object Favorites : Destination, TopLevelDestination {
+    data object CompletedTodoTab : Destination, TopLevelDestination, TopAppBarVisible {
         override val icon: DrawableResource
             get() = Res.drawable.ic_fav_icon
         override val title: StringResource
-            get() = Res.string.favorites_title
+            get() = Res.string.completed_todo_title
     }
 
     @Serializable
-    data object Settings : Destination, TopLevelDestination {
+    data object SettingsTab : Destination, TopLevelDestination, TopAppBarVisible {
         override val icon: DrawableResource
             get() = Res.drawable.ic_settings_icon
         override val title: StringResource
-            get() = Res.string.settings_title
+            get() = Res.string.settings_tab_title
     }
 }

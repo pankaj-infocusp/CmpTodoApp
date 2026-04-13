@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.sampe.cmp.app.navigation.main.Destination
+import com.sampe.cmp.app.navigation.main.TopbarVisibleDestinations
 
 /**
  * Controller to manage the navigation back stack.
@@ -80,6 +81,6 @@ class NavBackStack<T : Destination>(startDestination: T) {
 
     private fun updateTopAppBarVisibility(destination: T) {
         isTopBarVisible = true
-//            TopAppBarVisibleDestinations.any { dest -> dest::class == destination::class }
+        TopbarVisibleDestinations.any { dest -> dest::class == destination::class }
     }
 }

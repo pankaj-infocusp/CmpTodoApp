@@ -5,7 +5,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import sampecmpapp.composeapp.generated.resources.Res
 import sampecmpapp.composeapp.generated.resources.ic_settings_icon
-import sampecmpapp.composeapp.generated.resources.settings_title
+import sampecmpapp.composeapp.generated.resources.settings_tab_title
 
 object SettingsDestination {
 
@@ -14,6 +14,6 @@ object SettingsDestination {
         override val icon: DrawableResource
             get() = Res.drawable.ic_settings_icon
         override val title: StringResource
-            get() = Res.string.settings_title
+            get() = Res.string.settings_tab_title
     }
 }

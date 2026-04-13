@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import com.sampe.cmp.app.navigation.main.Destination
-import com.sampe.cmp.app.navigation.main.HomeDestination
+import com.sampe.cmp.app.navigation.main.MainDestination
 import com.sampe.cmp.app.navigation.navcontroller.NavBackStack
 
 @Stable
@@ -14,7 +14,7 @@ data class TodoAppState(val navBackState: NavBackStack<Destination>)
 @Composable
 fun rememberTodoAppState(
     navBackStack: NavBackStack<Destination> = remember {
-        NavBackStack(HomeDestination.Home)
+        NavBackStack(MainDestination.TodoTab)
     }
 ): TodoAppState = remember(navBackStack) {
     TodoAppState(navBackStack)

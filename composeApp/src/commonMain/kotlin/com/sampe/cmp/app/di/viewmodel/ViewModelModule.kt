@@ -3,6 +3,8 @@ package com.sampe.cmp.app.di.viewmodel
 import com.sampe.cmp.app.domain.usecase.AddTodoUseCase
 import com.sampe.cmp.app.domain.usecase.DeleteTodoUseCase
 import com.sampe.cmp.app.domain.usecase.GetAllTodosUseCase
+import com.sampe.cmp.app.domain.usecase.GetTodoByIdUseCase
+import com.sampe.cmp.app.domain.usecase.UpdateTodoUseCase
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.TodoViewModel
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -13,6 +15,8 @@ val viewModelModule = module {
     singleOf(::AddTodoUseCase)
     singleOf(::GetAllTodosUseCase)
     singleOf(::DeleteTodoUseCase)
+    singleOf(::GetTodoByIdUseCase)
+    singleOf(::UpdateTodoUseCase)
 
     //ViewModel provider
     viewModelOf(::TodoViewModel)
