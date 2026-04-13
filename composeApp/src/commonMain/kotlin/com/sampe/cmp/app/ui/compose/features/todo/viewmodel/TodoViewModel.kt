@@ -2,9 +2,7 @@ package com.sampe.cmp.app.ui.compose.features.todo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sampe.cmp.app.database.entity.Todo
-import com.sampe.cmp.app.domain.usecase.AddTodoUseCase
 import com.sampe.cmp.app.domain.usecase.DeleteTodoUseCase
 import com.sampe.cmp.app.domain.usecase.GetAllTodosUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateTodoUseCase
@@ -16,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class TodoViewModel(
     getAllTodosUseCase: GetAllTodosUseCase,
-    private val addTodoUseCase: AddTodoUseCase,
     private val deleteTodoUseCase: DeleteTodoUseCase,
     private val updateTodoUseCase: UpdateTodoUseCase,
 ): ViewModel() {
@@ -27,12 +24,6 @@ class TodoViewModel(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
         )
-
-    fun addTodo(todo: Todo) {
-        viewModelScope.launch(Dispatchers.IO) {
-            addTodoUseCase.invoke(todo)
-        }
-    }
 
     fun onTodoCompleted(todo: Todo) {
         viewModelScope.launch(Dispatchers.IO) {

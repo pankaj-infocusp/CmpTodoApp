@@ -47,7 +47,7 @@ fun TodoScreen(
     isSinglePane: Boolean,
     todos: List<Todo>,
     onItemClick: (Long) -> Unit,
-    onCreateTodo: (Todo) -> Unit,
+    onCreateTodo: () -> Unit,
     onComplete: (Todo) -> Unit,
     onDelete: (Long) -> Unit
 ) {
@@ -68,7 +68,7 @@ private fun TodoScaffold(
     isSinglePane: Boolean,
     todos: List<Todo>,
     onItemClick: (Long) -> Unit,
-    onCreateTodo: (Todo) -> Unit,
+    onCreateTodo: () -> Unit,
     onComplete: (Todo) -> Unit,
     onDelete: (Long) -> Unit
 ) {
@@ -103,7 +103,7 @@ private fun TodoScaffold(
 private fun SinglePanDeviceScaffold(
     modifier: Modifier = Modifier,
     todos: List<Todo>,
-    onCreateTodo: (Todo) -> Unit,
+    onCreateTodo: () -> Unit,
     onDelete: (Long) -> Unit,
     onItemClick: (Long) -> Unit,
     onComplete: (Todo) -> Unit
@@ -113,15 +113,7 @@ private fun SinglePanDeviceScaffold(
         modifier = modifier.fillMaxSize(),
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { onCreateTodo.invoke(
-                    Todo(
-                        title = "New Todo",
-                        body = "New Todo Body",
-                        color = colorList.random().toArgb(),
-                        createdAt = Clock.System.now().toEpochMilliseconds(),
-                        updatedAt = null
-                    )
-                ) },
+                onClick = onCreateTodo,
                 content = {
                     Icon(
                         painter = painterResource(Res.drawable.ic_add_icon),

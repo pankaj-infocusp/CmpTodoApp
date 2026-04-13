@@ -4,4 +4,8 @@
     <string name="completed_todo_title">Completed</string>
     <string name="settings_tab_title">Settings</string>
     <string name="something_went_wrong">Something went wrong.</string>
+
+    <string name="enter_todo">Enter todo...</string>
+    <string name="select_color">Select Color</string>
+    <string name="add_todo">Add Todo</string>
 </resources>
