@@ -3,7 +3,7 @@ package com.sampe.cmp.app.di.navigation
 import com.sampe.cmp.app.navigation.navcontroller.NavEventController
 import com.sampe.cmp.app.navigation.navcontroller.NavEventControllerImpl
 import com.sampe.cmp.app.navigation.navcontroller.NavGraph
-import com.sampe.cmp.app.navigation.navgraph.favorites.CompletedTodosNavGraph
+import com.sampe.cmp.app.navigation.navgraph.favorites.TodoHistoryNavGraph
 import com.sampe.cmp.app.navigation.navgraph.home.TodoTabNavGraph
 import com.sampe.cmp.app.navigation.navgraph.settings.SettingsNavGraph
 import org.koin.core.module.dsl.factoryOf
@@ -18,6 +18,6 @@ val navigationModule = module {
 
 val bottomBarModule = module {
     factoryOf(::TodoTabNavGraph) bind NavGraph::class
-    factoryOf(::CompletedTodosNavGraph) bind NavGraph::class
+    factoryOf(::TodoHistoryNavGraph) bind NavGraph::class
     factoryOf(::SettingsNavGraph) bind NavGraph::class
 }

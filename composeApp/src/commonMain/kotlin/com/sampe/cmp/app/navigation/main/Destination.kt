@@ -11,13 +11,13 @@ sealed interface Destination {
 /** All BottomBar destinations. */
 val BottomBarDestinations: Set<BottomBarDestination> = setOf(
     MainDestination.TodoTab,
-    MainDestination.CompletedTodoTab,
+    MainDestination.HistoryTab,
     MainDestination.SettingsTab,
 )
 
 /** All Destinations that should have TopBar visible */
 val TopbarVisibleDestinations: Set<TopAppBarVisible> = setOf(
     MainDestination.TodoTab,
-    MainDestination.CompletedTodoTab,
+    MainDestination.HistoryTab,
     MainDestination.SettingsTab
 )
