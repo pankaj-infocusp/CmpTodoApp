@@ -1,5 +1,9 @@
 package com.sampe.cmp.app.ui.compose.main
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -22,6 +26,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.sampe.cmp.app.navigation.events.HomeEvent
 import com.sampe.cmp.app.navigation.main.TopLevelDestination
 import com.sampe.cmp.app.navigation.main.TopLevelDestinations
@@ -75,7 +81,11 @@ private fun MainScreenScaffold(
     setCurrentDestination: (TopLevelDestination) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
+    val isTopAppBarVisible = appState.navBackState.isTopBarVisible
+    val topBarOffset: Dp by animateDpAsState(
+        targetValue = if (isTopAppBarVisible) 0.dp else 64.dp,
+        animationSpec = tween(easing = LinearEasing),
+    )
     NavigationSuiteScaffold(
         modifier = modifier,
         navigationSuiteItems = {
@@ -88,12 +98,17 @@ private fun MainScreenScaffold(
     ) {
         Scaffold(
             topBar = {
-                CommonCenterTopAppBar(
-                    title = stringResource(currentDestination.title)
-                )
+                AnimatedVisibility(
+                    visible = isTopAppBarVisible,
+                ) {
+                    CommonCenterTopAppBar(
+                        title = stringResource(currentDestination.title)
+                    )
+                }
             },
             contentWindowInsets = WindowInsets(left = 0, top = 0, right = 0, bottom = 0),
         ) { padding ->
+            val topPadding = padding.calculateTopPadding() - topBarOffset
             NavigationHost(
                 navBackStack = appState.navBackState,
                 modifier = Modifier
@@ -101,7 +116,7 @@ private fun MainScreenScaffold(
                     .padding(
                         start = padding.calculateStartPadding(LocalLayoutDirection.current),
                         end = padding.calculateEndPadding(LocalLayoutDirection.current),
-                        top = padding.calculateTopPadding(),
+                        top = if (topPadding > 0.dp) topPadding else 0.dp,
                         bottom = padding.calculateBottomPadding()
                     ).consumeWindowInsets(padding)
                     .windowInsetsPadding(

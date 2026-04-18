@@ -80,7 +80,7 @@ class NavBackStack<T : Destination>(startDestination: T) {
     }
 
     private fun updateTopAppBarVisibility(destination: T) {
-        isTopBarVisible = true
-        TopbarVisibleDestinations.any { dest -> dest::class == destination::class }
+        isTopBarVisible =
+            TopbarVisibleDestinations.any { dest -> dest::class == destination::class }
     }
 }

@@ -9,16 +9,16 @@ import androidx.navigation3.scene.DialogSceneStrategy
 import com.sampe.cmp.app.extension.isSinglePane
 import com.sampe.cmp.app.navigation.events.Event
 import com.sampe.cmp.app.navigation.events.TodoEvent
-import com.sampe.cmp.app.ui.compose.features.todo.ui.TodoScreen
-import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.TodoViewModel
 import com.sampe.cmp.app.navigation.main.Destination
 import com.sampe.cmp.app.navigation.main.MainDestination
 import com.sampe.cmp.app.navigation.main.TodoDestination
 import com.sampe.cmp.app.navigation.navcontroller.NavEventController
 import com.sampe.cmp.app.navigation.navcontroller.NavGraph
 import com.sampe.cmp.app.ui.compose.features.todo.ui.AddTodoBottomSheet
+import com.sampe.cmp.app.ui.compose.features.todo.ui.TodoScreen
 import com.sampe.cmp.app.ui.compose.features.todo.ui.UpdateTodoScreen
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.AddTodoViewModel
+import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.TodoViewModel
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.UpdateTodoViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -39,9 +39,6 @@ internal class TodoTabNavGraph: NavGraph {
                     },
                     onComplete = { todo ->
                         viewModel.onTodoCompleted(todo)
-                    },
-                    onDelete = { id ->
-                        viewModel.deleteTodo(id)
                     }
                 )
             }
@@ -51,7 +48,6 @@ internal class TodoTabNavGraph: NavGraph {
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
                 LaunchedEffect(Unit) {
-                    println("Fetching Todo with id: ${entry.todoId}")
                     viewModel.getTodoById(entry.todoId)
                 }
 

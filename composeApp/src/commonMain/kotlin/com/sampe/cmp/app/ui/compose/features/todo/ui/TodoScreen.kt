@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FloatingActionButton
@@ -25,7 +26,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextOverflow
@@ -37,7 +41,7 @@ import com.sampe.cmp.app.utils.DateTimeUtils
 import org.jetbrains.compose.resources.painterResource
 import sampecmpapp.composeapp.generated.resources.Res
 import sampecmpapp.composeapp.generated.resources.ic_add_icon
-import sampecmpapp.composeapp.generated.resources.ic_delete_icon
+import sampecmpapp.composeapp.generated.resources.ic_arrow_back
 import kotlin.time.Clock
 
 @Composable
@@ -47,8 +51,7 @@ fun TodoScreen(
     todos: List<Todo>,
     onItemClick: (Long) -> Unit,
     onCreateTodo: () -> Unit,
-    onComplete: (Todo) -> Unit,
-    onDelete: (Long) -> Unit
+    onComplete: (Todo) -> Unit
 ) {
     TodoScaffold(
         modifier = modifier,
@@ -56,8 +59,7 @@ fun TodoScreen(
         todos = todos,
         onItemClick = onItemClick,
         onCreateTodo = onCreateTodo,
-        onComplete = onComplete,
-        onDelete = onDelete
+        onComplete = onComplete
     )
 }
 
@@ -68,8 +70,7 @@ private fun TodoScaffold(
     todos: List<Todo>,
     onItemClick: (Long) -> Unit,
     onCreateTodo: () -> Unit,
-    onComplete: (Todo) -> Unit,
-    onDelete: (Long) -> Unit
+    onComplete: (Todo) -> Unit
 ) {
 
     if (isSinglePane) {
@@ -78,8 +79,7 @@ private fun TodoScaffold(
             todos = todos,
             onCreateTodo = onCreateTodo,
             onItemClick = onItemClick,
-            onComplete = onComplete,
-            onDelete = onDelete
+            onComplete = onComplete
         )
     } else {
         /*MultiPanDeviceScaffold(
@@ -92,8 +92,7 @@ private fun TodoScaffold(
             todos = todos,
             onCreateTodo = onCreateTodo,
             onItemClick = onItemClick,
-            onComplete = onComplete,
-            onDelete = onDelete
+            onComplete = onComplete
         )
     }
 }
@@ -103,7 +102,6 @@ private fun SinglePanDeviceScaffold(
     modifier: Modifier = Modifier,
     todos: List<Todo>,
     onCreateTodo: () -> Unit,
-    onDelete: (Long) -> Unit,
     onItemClick: (Long) -> Unit,
     onComplete: (Todo) -> Unit
 ) {
@@ -134,8 +132,7 @@ private fun SinglePanDeviceScaffold(
                     TodoItem(
                         item = item,
                         onItemClick = onItemClick,
-                        onComplete = onComplete,
-                        onDelete = onDelete
+                        onComplete = onComplete
                     )
                 }
             )
@@ -159,8 +156,7 @@ private fun TodoItem(
     modifier: Modifier = Modifier,
     item: Todo,
     onItemClick: (Long) -> Unit,
-    onComplete: (Todo) -> Unit,
-    onDelete: (Long) -> Unit
+    onComplete: (Todo) -> Unit
 ) {
     ElevatedCard(
         elevation = CardDefaults.elevatedCardElevation(4.dp),
@@ -207,15 +203,20 @@ private fun TodoItem(
                 )
             }
             IconButton(
-                onClick = { onDelete.invoke(item.id) },
+                onClick = { onItemClick.invoke(item.id) },
                 content = {
                     Icon(
-                        painter = painterResource(Res.drawable.ic_delete_icon),
-                        contentDescription = "Delete",
-                        tint = Color.White
+                        painter = painterResource(Res.drawable.ic_arrow_back),
+                        contentDescription = "Item clicked",
+                        tint = Color.White,
+                        modifier = Modifier
+                            .rotate(180f)
                     )
                 },
-                modifier = Modifier.fillMaxHeight(),
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .fillMaxHeight()
+                .align(Alignment.CenterVertically)
             )
         }
     }
@@ -237,7 +238,6 @@ private fun TodoListPreview() {
         ),
         onItemClick = {},
         onCreateTodo = {},
-        onComplete = {},
-        onDelete = {}
+        onComplete = {}
     )
 }

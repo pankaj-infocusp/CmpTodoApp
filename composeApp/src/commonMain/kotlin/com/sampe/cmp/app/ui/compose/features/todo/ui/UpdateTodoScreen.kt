@@ -65,6 +65,9 @@ fun UpdateTodoScreen(
         is UpdateTodoViewModel.UiState.Error -> {
             ErrorUi(modifier = modifier)
         }
+        is UpdateTodoViewModel.UiState.Back -> {
+            onBackClick.invoke()
+        }
     }
 }
 
@@ -79,8 +82,8 @@ private fun UpdateTodoUi(
     onBackClick: () -> Unit
 ) {
 
-    val title = remember { mutableStateOf(todo.title) }
-    val body = remember { mutableStateOf(todo.body) }
+    val title = remember(todo.title) { mutableStateOf(todo.title) }
+    val body = remember(todo.body) { mutableStateOf(todo.body) }
 
     Scaffold(
         topBar = {

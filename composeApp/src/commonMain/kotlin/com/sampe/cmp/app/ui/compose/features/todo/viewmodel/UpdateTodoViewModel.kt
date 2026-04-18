@@ -1,5 +1,6 @@
 package com.sampe.cmp.app.ui.compose.features.todo.viewmodel
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sampe.cmp.app.coroutine.CoroutineDebouncer
@@ -9,6 +10,7 @@ import com.sampe.cmp.app.domain.usecase.GetTodoByIdUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateBodyUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateTitleUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateTodoUseCase
+import com.sampe.cmp.app.utils.AppConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -54,6 +56,7 @@ class UpdateTodoViewModel(
     fun deleteTodo(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             deleteTodoUseCase.invoke(id)
+            _uiState.emit(UiState.Back)
         }
     }
 
@@ -61,5 +64,6 @@ class UpdateTodoViewModel(
        data object Loading: UiState()
        data class Success(val todo: Todo): UiState()
        data object Error: UiState()
+       data object Back: UiState()
    }
 }
