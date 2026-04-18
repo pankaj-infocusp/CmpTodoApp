@@ -10,7 +10,7 @@ import sampecmpapp.composeapp.generated.resources.ic_fav_icon
 object CompletedTodoDestination {
 
     @Serializable
-    data object CompletedTodos : Destination, TopLevelDestination {
+    data object CompletedTodos : Destination, BottomBarDestination {
         override val icon: DrawableResource
             get() = Res.drawable.ic_fav_icon
         override val title: StringResource

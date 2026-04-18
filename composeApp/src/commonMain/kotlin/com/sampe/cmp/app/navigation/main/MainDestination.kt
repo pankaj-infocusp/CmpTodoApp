@@ -14,7 +14,7 @@ import sampecmpapp.composeapp.generated.resources.settings_tab_title
 object MainDestination {
 
     @Serializable
-    data object TodoTab : Destination, TopLevelDestination, TopAppBarVisible {
+    data object TodoTab : Destination, BottomBarDestination, TopAppBarVisible {
         override val icon: DrawableResource
             get() = Res.drawable.ic_home_icon
         override val title: StringResource
@@ -22,7 +22,7 @@ object MainDestination {
     }
 
     @Serializable
-    data object CompletedTodoTab : Destination, TopLevelDestination, TopAppBarVisible {
+    data object CompletedTodoTab : Destination, BottomBarDestination, TopAppBarVisible {
         override val icon: DrawableResource
             get() = Res.drawable.ic_fav_icon
         override val title: StringResource
@@ -30,7 +30,7 @@ object MainDestination {
     }
 
     @Serializable
-    data object SettingsTab : Destination, TopLevelDestination, TopAppBarVisible {
+    data object SettingsTab : Destination, BottomBarDestination, TopAppBarVisible {
         override val icon: DrawableResource
             get() = Res.drawable.ic_settings_icon
         override val title: StringResource

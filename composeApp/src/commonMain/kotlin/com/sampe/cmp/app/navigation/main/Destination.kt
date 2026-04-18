@@ -8,10 +8,8 @@ sealed interface Destination {
     data object Back : Destination
 }
 
-/**
- * All top-level (BottomBar) destinations.
- */
-val TopLevelDestinations: Set<TopLevelDestination> = setOf(
+/** All BottomBar destinations. */
+val BottomBarDestinations: Set<BottomBarDestination> = setOf(
     MainDestination.TodoTab,
     MainDestination.CompletedTodoTab,
     MainDestination.SettingsTab,

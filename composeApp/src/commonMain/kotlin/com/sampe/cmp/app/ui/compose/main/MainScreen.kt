@@ -29,8 +29,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.sampe.cmp.app.navigation.events.HomeEvent
-import com.sampe.cmp.app.navigation.main.TopLevelDestination
-import com.sampe.cmp.app.navigation.main.TopLevelDestinations
+import com.sampe.cmp.app.navigation.main.BottomBarDestination
+import com.sampe.cmp.app.navigation.main.BottomBarDestinations
 import com.sampe.cmp.app.navigation.navcontroller.NavEventController
 import com.sampe.cmp.app.ui.compose.common.CommonCenterTopAppBar
 import com.sampe.cmp.app.ui.compose.common.TodoAppState
@@ -59,15 +59,15 @@ private fun MainScreenContent(
     navEventController: NavEventController = koinInject()
 ) {
 
-    val navItems by rememberSaveable { mutableStateOf(TopLevelDestinations) }
-    val setCurrentDestination = { destination: TopLevelDestination ->
+    val navItems by rememberSaveable { mutableStateOf(BottomBarDestinations) }
+    val setCurrentDestination = { destination: BottomBarDestination ->
         navEventController.sendEvent(HomeEvent.OnTabClick(destination))
     }
 
     MainScreenScaffold(
         appState = appState,
         navItems = navItems.toImmutableList(),
-        currentDestination = appState.navBackState.currentDestination as TopLevelDestination,
+        currentDestination = appState.navBackState.currentDestination as BottomBarDestination,
         setCurrentDestination = setCurrentDestination,
         modifier = modifier
     )
@@ -76,9 +76,9 @@ private fun MainScreenContent(
 @Composable
 private fun MainScreenScaffold(
     appState: TodoAppState,
-    navItems: ImmutableList<TopLevelDestination>,
-    currentDestination: TopLevelDestination,
-    setCurrentDestination: (TopLevelDestination) -> Unit,
+    navItems: ImmutableList<BottomBarDestination>,
+    currentDestination: BottomBarDestination,
+    setCurrentDestination: (BottomBarDestination) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val isTopAppBarVisible = appState.navBackState.isTopBarVisible
@@ -129,9 +129,9 @@ private fun MainScreenScaffold(
 
 
 private fun NavigationSuiteScope.bottomNavigationBar(
-    navItems: List<TopLevelDestination>,
-    currentDestination: TopLevelDestination,
-    setCurrentDestination: (TopLevelDestination) -> Unit
+    navItems: List<BottomBarDestination>,
+    currentDestination: BottomBarDestination,
+    setCurrentDestination: (BottomBarDestination) -> Unit
 ) {
     navItems.forEach { destination ->
         val isSelected = currentDestination == destination

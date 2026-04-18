@@ -10,7 +10,7 @@ import sampecmpapp.composeapp.generated.resources.settings_tab_title
 object SettingsDestination {
 
     @Serializable
-    data object Settings : Destination, TopLevelDestination {
+    data object Settings : Destination, BottomBarDestination {
         override val icon: DrawableResource
             get() = Res.drawable.ic_settings_icon
         override val title: StringResource

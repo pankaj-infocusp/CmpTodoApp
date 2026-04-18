@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation3.ui.NavDisplay
 import com.sampe.cmp.app.di.navigation.NavGraphProvider
 import com.sampe.cmp.app.navigation.main.Destination
-import com.sampe.cmp.app.navigation.main.TopLevelDestination
+import com.sampe.cmp.app.navigation.main.BottomBarDestination
 import com.sampe.cmp.app.navigation.navcontroller.NavBackStack
 import com.sampe.cmp.app.navigation.navcontroller.NavEventController
 import org.koin.compose.koinInject
@@ -38,7 +38,7 @@ private fun AppNavigation(
                     navBackStack.removeLast()
                 }
 
-                is TopLevelDestination -> {
+                is BottomBarDestination -> {
                     if (destination == navBackStack.currentDestination) {
                         navBackStack.clearTopLevel(destination)
                     } else {
