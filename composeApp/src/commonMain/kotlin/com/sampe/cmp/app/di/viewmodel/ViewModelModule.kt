@@ -4,9 +4,11 @@ import com.sampe.cmp.app.domain.usecase.AddTodoUseCase
 import com.sampe.cmp.app.domain.usecase.DeleteTodoUseCase
 import com.sampe.cmp.app.domain.usecase.GetAllTodosUseCase
 import com.sampe.cmp.app.domain.usecase.GetTodoByIdUseCase
+import com.sampe.cmp.app.domain.usecase.TodoHistoryUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateBodyUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateTitleUseCase
 import com.sampe.cmp.app.domain.usecase.UpdateTodoUseCase
+import com.sampe.cmp.app.ui.compose.features.history.viewmodel.TodoHistoryViewModel
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.AddTodoViewModel
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.TodoViewModel
 import com.sampe.cmp.app.ui.compose.features.todo.viewmodel.UpdateTodoViewModel
@@ -23,9 +25,11 @@ val viewModelModule = module {
     singleOf(::UpdateTodoUseCase)
     singleOf(::UpdateTitleUseCase)
     singleOf(::UpdateBodyUseCase)
+    singleOf(::TodoHistoryUseCase)
 
     //ViewModel provider
     viewModelOf(::TodoViewModel)
     viewModelOf(::AddTodoViewModel)
     viewModelOf(::UpdateTodoViewModel)
+    viewModelOf(::TodoHistoryViewModel)
 }

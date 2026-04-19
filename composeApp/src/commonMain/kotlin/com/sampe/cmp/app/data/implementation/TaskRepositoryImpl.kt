@@ -28,6 +28,10 @@ class TaskRepositoryImpl(
         return todoDao.getAllTodoAsFlow()
     }
 
+    override fun getCompletedTodos(): Flow<List<Todo>> {
+        return todoDao.getCompletedTodos()
+    }
+
     override suspend fun deleteAllTodos() {
         todoDao.deleteAllTodos()
     }
