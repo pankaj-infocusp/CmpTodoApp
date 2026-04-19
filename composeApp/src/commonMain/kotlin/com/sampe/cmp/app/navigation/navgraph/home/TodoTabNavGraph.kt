@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.scene.DialogSceneStrategy
-import com.sampe.cmp.app.extension.isSinglePane
 import com.sampe.cmp.app.navigation.events.Event
 import com.sampe.cmp.app.navigation.events.TodoEvent
 import com.sampe.cmp.app.navigation.main.Destination
@@ -29,7 +28,7 @@ internal class TodoTabNavGraph: NavGraph {
                 val viewModel: TodoViewModel = koinViewModel()
                 val todos by viewModel.todos.collectAsStateWithLifecycle()
                 TodoScreen(
-                    isSinglePane = currentWindowAdaptiveInfo().windowSizeClass.isSinglePane(),
+                    isSinglePane = true, // currentWindowAdaptiveInfo().windowSizeClass.isSinglePane(),
                     todos = todos,
                     onItemClick = { id ->
                         navEventController.sendEvent(TodoEvent.OnUpdateTodoClick(id))

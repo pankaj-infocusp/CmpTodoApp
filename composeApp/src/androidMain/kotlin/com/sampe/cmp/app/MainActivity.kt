@@ -10,14 +10,12 @@ import com.sampe.cmp.app.ui.compose.features.settings.viewmodel.SettingsViewMode
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
-    val viewModel by viewModel<SettingsViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {
-            val themePref by viewModel.savedTheme.collectAsStateWithLifecycle()
-            TodoApp(themePref = themePref)
+            TodoApp()
         }
     }
 }
