@@ -14,4 +14,9 @@
     <string name="delete_todo">Delete Todo</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
+
+    <string name="theme_title">App Theme</string>
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="system_default_theme">System default</string>
 </resources>

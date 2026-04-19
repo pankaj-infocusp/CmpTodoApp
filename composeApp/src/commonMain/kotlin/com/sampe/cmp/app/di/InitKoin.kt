@@ -1,6 +1,7 @@
 package com.sampe.cmp.app.di
 
 import com.sampe.cmp.app.di.coroutine.coroutinesModule
+import com.sampe.cmp.app.di.datastore.dataStorePrefModule
 import com.sampe.cmp.app.di.navigation.bottomBarModule
 import com.sampe.cmp.app.di.navigation.navigationModule
 import com.sampe.cmp.app.di.repository.repositoryModule
@@ -12,6 +13,7 @@ import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
 expect fun roomBuilderModule(): Module
+expect fun dataStoreModule(): Module
 
 fun initKoin(
     config: KoinAppDeclaration? = null,
@@ -30,5 +32,7 @@ internal val appModules = listOf(
     roomBuilderModule(),
     roomModule,
     repositoryModule,
-    viewModelModule
+    viewModelModule,
+    dataStoreModule(),
+    dataStorePrefModule
 )
